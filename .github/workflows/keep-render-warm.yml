@@ -1,0 +1,22 @@
+name: Keep Render Warm
+
+on:
+  schedule:
+    # 08:50 VN prewarm.
+    - cron: "50 1,6,11 * * *"
+    # 09:00-12:50 VN every 10 minutes.
+    - cron: "*/10 2-5 * * *"
+    # 14:00-17:50 VN every 10 minutes.
+    - cron: "*/10 7-10 * * *"
+    # 19:00-20:50 VN every 10 minutes.
+    - cron: "*/10 12-13 * * *"
+  workflow_dispatch:
+
+jobs:
+  keep-render-warm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping staging backend warmup endpoint
+        env:
+          STAGING_BACKEND_URL: ${{ secrets.STAGING_BACKEND_URL }}
+        run: curl -fsS --max-time 20 "$STAGING_BACKEND_URL/warmup" || true
