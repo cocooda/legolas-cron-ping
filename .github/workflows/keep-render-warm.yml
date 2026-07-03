@@ -2,14 +2,14 @@ name: Keep Render Warm
 
 on:
   schedule:
-    # 08:50 VN prewarm.
-    - cron: "50 1,6,11 * * *"
-    # 09:00-12:50 VN every 10 minutes.
-    - cron: "*/10 2-5 * * *"
-    # 14:00-17:50 VN every 10 minutes.
-    - cron: "*/10 7-10 * * *"
-    # 19:00-20:50 VN every 10 minutes.
-    - cron: "*/10 12-13 * * *"
+    # 08:53, 13:53, 18:53 VN prewarm.
+    - cron: "53 1,6,11 * * *"
+    # 09:03-12:53 VN every 10 minutes.
+    - cron: "3,13,23,33,43,53 2-5 * * *"
+    # 14:03-17:53 VN every 10 minutes.
+    - cron: "3,13,23,33,43,53 7-10 * * *"
+    # 19:03-20:53 VN every 10 minutes.
+    - cron: "3,13,23,33,43,53 12-13 * * *"
   workflow_dispatch:
 
 jobs:
